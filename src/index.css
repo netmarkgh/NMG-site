@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Epilogue:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Syne", sans-serif;
+  --font-onboarding: "Epilogue", sans-serif;
+
+  --color-brand-black: #0E0E0E;
+  --color-brand-white: #F7F5F0;
+  --color-brand-green: #1A6B3C;
+  --color-brand-green-light: #2D9A5A;
+  --color-brand-green-pale: #E8F5EE;
+  --color-brand-gold: #C8923A;
+  --color-brand-gold-pale: #FDF3E3;
+  --color-brand-grey: #888;
+  --color-brand-border: rgba(0,0,0,0.1);
+}
+
+@layer base {
+  body {
+    @apply bg-brand-white text-brand-black font-sans overflow-x-hidden scroll-smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-brand-black;
+  }
+}
+
+@layer utilities {
+  .reveal {
+    @apply opacity-0 translate-y-6 transition-all duration-700 ease-out;
+  }
+
+  .reveal.visible {
+    @apply opacity-100 translate-y-0;
+  }
+
+  .hero-bg {
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(232,184,75,0.09) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 10% 80%, rgba(62,211,122,0.06) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    @apply opacity-[0.03];
+    background-image: linear-gradient(var(--color-brand-border) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--color-brand-border) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+}

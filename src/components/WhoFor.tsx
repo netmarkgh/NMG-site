@@ -17,13 +17,13 @@ export default function WhoFor() {
       <div ref={containerRef} className="max-w-7xl mx-auto">
         <div className="max-w-2xl mb-16 text-center md:text-left mx-auto md:mx-0">
           <p className="reveal text-brand-green text-[11px] font-bold tracking-[0.2em] uppercase mb-4">
-            Who We Serve
+            Industries We Serve
           </p>
           <h2 className="reveal font-display text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-6">
-            Built for Ghana's real businesses
+            Ghanaian business sectors we grow
           </h2>
           <p className="reveal text-brand-grey text-base md:text-lg leading-relaxed">
-            If you run a business in Ghana and want more customers online, NMG was made for you.
+            From retail to construction, we've helped diverse industries establish a strong digital presence in the Ghanaian market.
           </p>
         </div>
 

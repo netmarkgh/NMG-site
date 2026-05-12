@@ -7,8 +7,7 @@ export default function ProblemStrip() {
     <div className="bg-brand-black text-brand-white py-16 md:py-20 px-6">
       <div ref={containerRef} className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-20">
         <p className="reveal flex-1 font-display text-2xl md:text-3xl lg:text-4xl font-bold leading-tight">
-          Most Ghanaian businesses are<br />
-          <span className="text-brand-gold italic">invisible online.</span><br />
+          Most Ghanaian businesses are<br /><span className="text-brand-gold italic">invisible online.</span><br />
           That's money left behind every day.
         </p>
         <ul className="reveal flex-1 space-y-4">

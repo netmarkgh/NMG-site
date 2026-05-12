@@ -15,13 +15,13 @@ export default function SocialProof() {
   const containerRef = useReveal();
 
   return (
-    <section id="our-clients" className="bg-brand-dark px-6 py-24 md:py-32">
+    <section id="our-clients" className="bg-brand-black px-6 py-24 md:py-32">
       <div ref={containerRef} className="max-w-7xl mx-auto">
         <div className="max-w-2xl mb-16">
           <p className="reveal text-brand-gold text-[11px] font-bold tracking-[0.2em] uppercase mb-4">
             Who We Work With
           </p>
-          <h2 className="reveal font-display text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-6">
+          <h2 className="reveal font-display text-white text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-6">
             Real businesses.<br />
             <span className="text-brand-gold">Real results.</span>
           </h2>
@@ -37,7 +37,7 @@ export default function SocialProof() {
               className="bg-brand-card border border-brand-border p-6 rounded-2xl hover:border-brand-gold/30 hover:-translate-y-1 transition-all group"
             >
               <div className="w-2 h-2 bg-brand-green rounded-full mb-4 animate-pulse" />
-              <div className="font-display font-bold text-base mb-1 group-hover:text-brand-gold transition-colors">
+              <div className="font-display font-bold text-white text-base mb-1 group-hover:text-brand-gold transition-colors">
                 {c.biz}
               </div>
               <div className="text-[11px] uppercase tracking-wider text-white/40 font-semibold italic">

@@ -16,9 +16,9 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'Services', path: '/#services', isExternal: false },
-    { name: 'Our Clients', path: '/#our-clients', isExternal: false },
-    { name: 'Full Services', path: '/services', isExternal: false },
+    { name: 'Services', path: '#services', isExternal: false },
+    { name: 'Our Clients', path: '#our-clients', isExternal: false },
+    { name: 'Full Services', path: '#services', isExternal: false },
     { name: 'Get Onboarded', path: '/onboarding', isExternal: false },
   ];
 
@@ -29,15 +29,17 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-3 group">
-          <img 
-            src="/nmg_logo.png" 
-            alt="Net-Marketing Ghana" 
-            className="w-10 h-10 object-contain rounded"
-          />
-          <span className="font-display font-extrabold text-base tracking-tight text-brand-black">
-            Net-Marketing <span className="text-brand-green group-hover:text-brand-green-light transition-colors">Ghana</span>
-          </span>
+        <Link to="/" className="flex items-center group">
+          <div className="relative w-32 h-10 flex-shrink-0">
+            <img 
+              src={`${import.meta.env.BASE_URL}nmg_logo.png`} 
+              alt="Net-Marketing Ghana" 
+              className="w-full h-full object-contain"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=NMG&background=006C35&color=fff';
+              }}
+            />
+          </div>
         </Link>
 
         {/* Desktop Links */}
@@ -89,16 +91,16 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 bg-brand-dark/95 backdrop-blur-2xl border-b border-white/10 p-6 md:hidden"
+            className="absolute top-full left-0 right-0 bg-brand-black/95 backdrop-blur-2xl border-b border-white/10 p-6 md:hidden"
           >
             <ul className="flex flex-col gap-4">
               {navLinks.map((item) => (
                 <li key={item.name}>
-                  {item.path.startsWith('/#') ? (
+                  {item.path.startsWith('#') ? (
                     <a 
                       href={item.path}
                       onClick={() => setIsOpen(false)}
-                      className="block font-display text-lg font-semibold text-brand-white/60 hover:text-brand-white"
+                      className="block font-display text-lg font-semibold text-white/60 hover:text-white"
                     >
                       {item.name}
                     </a>
@@ -106,7 +108,7 @@ export default function Navbar() {
                     <Link 
                       to={item.path}
                       onClick={() => setIsOpen(false)}
-                      className="block font-display text-lg font-semibold text-brand-white/60 hover:text-brand-white"
+                      className="block font-display text-lg font-semibold text-white/60 hover:text-white"
                     >
                       {item.name}
                     </Link>
@@ -116,7 +118,7 @@ export default function Navbar() {
               <li>
                 <a 
                   href="https://wa.me/233268786647" 
-                  className="inline-flex w-full items-center justify-center gap-2 bg-brand-gold text-brand-black px-5 py-3 rounded-full font-display font-bold text-base"
+                  className="inline-flex w-full items-center justify-center gap-2 bg-brand-green text-white px-5 py-3 rounded-full font-display font-bold text-base"
                 >
                   Get Started <ArrowRight className="w-4 h-4" />
                 </a>

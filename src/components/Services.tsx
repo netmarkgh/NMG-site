@@ -4,7 +4,7 @@ import { MapPin, Smartphone, MessageSquare, Target, Globe, TrendingUp } from 'lu
 const services = [
   {
     icon: <MapPin className="w-5 h-5 text-brand-green" />,
-    title: 'Google Maps Listing (GBP)',
+    title: 'Google Maps SEO',
     desc: 'We set up, verify, and fully optimise your Google Business Profile so customers in your area find you first — on Google Search and Maps.',
     delivers: ['Verified & live on Google Maps', 'Optimised categories, photos & hours', 'Monthly performance reports']
   },
@@ -16,7 +16,7 @@ const services = [
   },
   {
     icon: <MessageSquare className="w-5 h-5 text-brand-green" />,
-    title: 'WhatsApp Sales Funnel',
+    title: 'WhatsApp Sales Funnels',
     desc: 'We build structured WhatsApp flows that turn enquiries into paying customers — so no lead slips through the cracks.',
     delivers: ['Funnel strategy & message scripts', 'Lead capture setup', 'Follow-up sequences']
   },
@@ -28,15 +28,15 @@ const services = [
   },
   {
     icon: <Globe className="w-5 h-5 text-brand-green" />,
-    title: 'Website Development',
+    title: 'Web Development',
     desc: 'We build clean, fast websites that represent your brand well and are built to convert — not just look good.',
     delivers: ['Mobile-first design', 'SEO-ready structure', 'WhatsApp & contact integration']
   },
   {
     icon: <TrendingUp className="w-5 h-5 text-brand-green" />,
-    title: 'NMG Connect',
-    desc: 'Join our growing business community of 500+ Accra, Ghana-based brands. Get referrals, visibility and marketing support.',
-    delivers: ['Business referral network', 'Status Marketing exposure', 'Community growth support']
+    title: 'TikTok SEO',
+    desc: 'Get discovered on TikTok\'s search engine. We optimise your content so it shows up when your customers are looking for what you sell.',
+    delivers: ['Video SEO optimisation', 'Trending sound strategy', 'Search ranking reports']
   },
 ];
 
@@ -50,7 +50,7 @@ export default function Services() {
           <p className="reveal text-brand-gold text-[11px] font-bold tracking-[0.2em] uppercase mb-4">
             What We Do
           </p>
-          <h2 className="reveal font-display text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-6">
+          <h2 className="reveal font-display text-white text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-6">
             Everything your business<br />
             needs to be found <span className="text-brand-gold">& chosen.</span>
           </h2>
@@ -59,24 +59,24 @@ export default function Services() {
           </p>
         </div>
 
-        <div className="reveal grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-brand-border border border-brand-border rounded-2xl overflow-hidden shadow-sm">
+        <div className="reveal grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 border border-white/10 rounded-2xl overflow-hidden shadow-sm">
           {services.map((s, i) => (
             <div 
               key={i} 
-              className="group bg-white p-8 md:p-10 relative overflow-hidden transition-all hover:bg-brand-green-pale/40"
+              className="group bg-brand-black p-8 md:p-10 relative overflow-hidden transition-all hover:bg-white/[0.02]"
             >
-              <div className="w-12 h-12 bg-brand-green-pale border border-brand-green/10 rounded-xl flex items-center justify-center mb-6">
+              <div className="w-12 h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center mb-6">
                 {s.icon}
               </div>
-              <h3 className="font-display font-bold text-lg mb-3">
+              <h3 className="font-display font-bold text-white text-lg mb-3">
                 {s.title}
               </h3>
-              <p className="text-brand-grey text-[13px] leading-relaxed mb-6">
+              <p className="text-white/50 text-[13px] leading-relaxed mb-6">
                 {s.desc}
               </p>
               <ul className="space-y-2">
                 {s.delivers.map((item, j) => (
-                  <li key={j} className="text-[11px] font-semibold text-brand-green flex items-center gap-2">
+                  <li key={j} className="text-[11px] font-semibold text-brand-gold flex items-center gap-2">
                     <span className="text-xs">→</span> {item}
                   </li>
                 ))}

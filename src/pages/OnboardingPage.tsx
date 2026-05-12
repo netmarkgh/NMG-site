@@ -216,14 +216,16 @@ export default function OnboardingPage() {
     <div className="min-h-screen bg-[#F7F6F2] font-onboarding pt-32 pb-20 px-6">
       <div className="max-w-2xl mx-auto mb-10">
         <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-3">
-            <img 
-              src="/nmg_logo.png" 
-              alt="NMG" 
-              className="w-10 h-10 object-contain rounded"
-            />
-            <div className="font-display font-black text-xl flex items-center gap-2">
-              NMG <span className="text-brand-gold">Connect</span>
+          <div className="flex items-center">
+            <div className="relative w-32 h-10 flex-shrink-0">
+              <img 
+                src={`${import.meta.env.BASE_URL}nmg_logo.png`} 
+                alt="NMG" 
+                className="w-full h-full object-contain"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=NMG&background=006C35&color=fff';
+                }}
+              />
             </div>
           </div>
           <div className="flex items-center gap-1.5 text-[10px] font-bold text-brand-grey uppercase tracking-widest bg-white border border-brand-border rounded-full px-4 py-1.5 shadow-sm">

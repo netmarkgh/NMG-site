@@ -23,7 +23,7 @@ export default function NMGConnect() {
           <p className="text-brand-gold text-[11px] font-bold tracking-[0.2em] uppercase mb-4">
             NMG Connect
           </p>
-          <h2 className="font-display text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-6">
+          <h2 className="font-display text-white text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-6">
             Ghana's business<br />
             growth <span className="text-brand-green">ecosystem.</span>
           </h2>

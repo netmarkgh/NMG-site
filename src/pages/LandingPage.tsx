@@ -4,6 +4,7 @@ import ProblemStrip from '../components/ProblemStrip';
 import Services from '../components/Services';
 import HowItWorks from '../components/HowItWorks';
 import WhoFor from '../components/WhoFor';
+import SocialProof from '../components/SocialProof';
 import Packages from '../components/Packages';
 import WhyNMG from '../components/WhyNMG';
 import NMGConnect from '../components/NMGConnect';
@@ -20,6 +21,7 @@ export default function LandingPage() {
         <Services />
         <HowItWorks />
         <WhoFor />
+        <SocialProof />
         <Packages />
         <WhyNMG />
         <NMGConnect />

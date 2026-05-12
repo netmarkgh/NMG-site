@@ -8,8 +8,9 @@ import LandingPage from './pages/LandingPage';
 import OnboardingPage from './pages/OnboardingPage';
 
 export default function App() {
+  const basename = import.meta.env.BASE_URL.replace(/\/$/, "");
   return (
-    <Router basename={import.meta.env.BASE_URL}>
+    <Router basename={basename || "/"}>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/services" element={<LandingPage />} /> {/* Placeholder */}

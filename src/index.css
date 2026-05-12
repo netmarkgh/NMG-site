@@ -7,14 +7,16 @@
   --font-onboarding: "Epilogue", sans-serif;
 
   --color-brand-black: #0E0E0E;
+  --color-brand-dark: #0A0A0A;
   --color-brand-white: #F7F5F0;
-  --color-brand-green: #1A6B3C;
-  --color-brand-green-light: #2D9A5A;
+  --color-brand-green: #006C35;
+  --color-brand-green-light: #1A8A4D;
   --color-brand-green-pale: #E8F5EE;
   --color-brand-gold: #C8923A;
   --color-brand-gold-pale: #FDF3E3;
   --color-brand-grey: #888;
   --color-brand-border: rgba(0,0,0,0.1);
+  --color-brand-card: rgba(255,255,255,0.03);
 }
 
 @layer base {

@@ -24,12 +24,11 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="font-display text-[clamp(2.5rem,7vw,4.8rem)] font-extrabold leading-[1.05] tracking-[-0.03em] mb-6 text-brand-black"
         >
-          More customers.<br />
+          We Grow<br />
           <span className="text-brand-green italic relative inline-block">
-            More revenue.
+            Ghanaian Businesses.
             <span className="absolute bottom-1 left-0 right-0 h-1 bg-brand-green/20 rounded-full" />
-          </span><br />
-          Less stress.
+          </span>
         </motion.h1>
 
         <motion.p 
@@ -38,7 +37,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-brand-grey text-lg md:text-xl font-light leading-relaxed max-w-xl mb-10"
         >
-          NMG is Ghana's done-for-you digital marketing agency. We handle your online presence so you can focus on running your business.
+          SEO, social media, WhatsApp funnels and map visibility — built specifically for SMEs and growing brands in Ghana.
         </motion.p>
 
         <motion.div 
@@ -53,13 +52,13 @@ export default function Hero() {
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-3 bg-brand-green text-white px-8 py-4 rounded-full font-sans font-medium text-base hover:bg-brand-green-light hover:-translate-y-1 hover:shadow-2xl hover:shadow-brand-green/20 transition-all"
           >
-            📲 Chat with us on WhatsApp
+            Chat With Us on WhatsApp
           </a>
           <a 
             href="#services" 
             className="inline-flex items-center gap-2 border border-black/20 text-brand-black px-8 py-4 rounded-full font-sans font-medium text-base hover:border-black/40 hover:-translate-y-1 transition-all"
           >
-            See Our Services
+            Our Services →
           </a>
         </motion.div>
       </div>

@@ -30,13 +30,16 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center group">
-          <div className="relative w-32 h-10 flex-shrink-0">
+          <div className="relative w-40 h-12 flex-shrink-0">
             <img 
               src={`${import.meta.env.BASE_URL}nmg_logo.png`} 
               alt="Net-Marketing Ghana" 
               className="w-full h-full object-contain"
               onError={(e) => {
-                (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=NMG&background=006C35&color=fff';
+                const target = e.target as HTMLImageElement;
+                if (!target.src.endsWith('.svg')) {
+                  target.src = `${import.meta.env.BASE_URL}nmg_logo.svg`;
+                }
               }}
             />
           </div>

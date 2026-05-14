@@ -217,13 +217,16 @@ export default function OnboardingPage() {
       <div className="max-w-2xl mx-auto mb-10">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center">
-            <div className="relative w-32 h-10 flex-shrink-0">
+            <div className="relative w-32 h-12 flex-shrink-0">
               <img 
                 src={`${import.meta.env.BASE_URL}nmg_logo.png`} 
                 alt="NMG" 
                 className="w-full h-full object-contain"
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = 'https://ui-avatars.com/api/?name=NMG&background=006C35&color=fff';
+                  const target = e.target as HTMLImageElement;
+                  if (!target.src.endsWith('.svg')) {
+                    target.src = `${import.meta.env.BASE_URL}nmg_logo.svg`;
+                  }
                 }}
               />
             </div>

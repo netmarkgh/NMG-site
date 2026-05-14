@@ -17,7 +17,14 @@ export function useReveal() {
     );
 
     const elements = containerRef.current?.querySelectorAll('.reveal');
+    
+    // Check elements *inside* the container
     elements?.forEach((el) => observer.observe(el));
+    
+    // Also check if the container *itself* has the reveal class
+    if (containerRef.current?.classList.contains('reveal')) {
+      observer.observe(containerRef.current);
+    }
 
     return () => observer.disconnect();
   }, []);

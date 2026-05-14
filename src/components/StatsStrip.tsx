@@ -11,13 +11,13 @@ export default function StatsStrip() {
   ];
 
   return (
-    <div ref={containerRef} className="grid grid-cols-2 md:grid-cols-4 bg-brand-border gap-px border-y border-brand-border">
+    <div ref={containerRef} className="grid grid-cols-2 md:grid-cols-4 bg-white/5 gap-px border-y border-white/10">
       {stats.map((stat, i) => (
-        <div key={i} className="reveal bg-brand-dark py-12 px-6 text-center group">
-          <div className="font-display text-4xl md:text-5xl font-extrabold text-brand-gold mb-2 group-hover:scale-110 transition-transform">
+        <div key={i} className="reveal bg-brand-black py-12 px-6 text-center group">
+          <div className="font-display text-4xl md:text-5xl font-extrabold text-brand-gold mb-3 group-hover:scale-110 transition-transform">
             {stat.num}
           </div>
-          <div className="text-[11px] uppercase tracking-wider text-white/40 font-semibold italic">
+          <div className="text-[10px] uppercase tracking-[0.2em] text-white/40 font-bold">
             {stat.lbl}
           </div>
         </div>

@@ -1,5 +1,6 @@
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
+import StatsStrip from '../components/StatsStrip';
 import ProblemStrip from '../components/ProblemStrip';
 import Services from '../components/Services';
 import HowItWorks from '../components/HowItWorks';
@@ -17,6 +18,7 @@ export default function LandingPage() {
       <Navbar />
       <main>
         <Hero />
+        <StatsStrip />
         <ProblemStrip />
         <Services />
         <HowItWorks />

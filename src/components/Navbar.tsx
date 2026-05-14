@@ -46,9 +46,15 @@ export default function Navbar() {
         <Link to="/" className="flex items-center group">
           <div className="relative w-40 h-12 flex-shrink-0">
             <img 
-              src="/logo.png" 
+              src={`${import.meta.env.BASE_URL}logo.png`} 
               alt="Net-Marketing Ghana" 
               className="w-full h-full object-contain"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                if (!target.src.endsWith('.svg')) {
+                  target.src = `${import.meta.env.BASE_URL}nmg_logo.svg`;
+                }
+              }}
             />
           </div>
         </Link>

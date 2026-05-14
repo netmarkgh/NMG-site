@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="px-6 py-12 bg-brand-black text-white/50 border-t border-white/5">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="flex items-center">
-          <div className="w-32 h-12 flex-shrink-0">
+          <div className="w-56 h-20 flex-shrink-0">
             <img 
               src={`${import.meta.env.BASE_URL}logo.png`} 
               alt="NMG" 

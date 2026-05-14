@@ -39,12 +39,12 @@ export default function Navbar() {
   return (
     <nav 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isSticky ? 'py-3 bg-white/95 backdrop-blur-md shadow-sm border-b border-brand-border' : 'py-6 bg-transparent'
+        isSticky ? 'py-3 bg-brand-black/95 backdrop-blur-md shadow-lg border-b border-white/10' : 'py-6 bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         <Link to="/" className="flex items-center group">
-          <div className="relative w-40 h-12 flex-shrink-0">
+          <div className="relative w-56 h-20 flex-shrink-0">
             <img 
               src={`${import.meta.env.BASE_URL}logo.png`} 
               alt="Net-Marketing Ghana" 
@@ -67,7 +67,7 @@ export default function Navbar() {
                 <a 
                   href={item.path} 
                   className={`font-sans text-[13px] font-medium transition-colors ${
-                    isSticky ? 'text-brand-black hover:text-brand-green' : 'text-white/80 hover:text-white'
+                    isSticky ? 'text-white/90 hover:text-brand-gold' : 'text-white/80 hover:text-white'
                   }`}
                 >
                   {item.name}
@@ -76,7 +76,7 @@ export default function Navbar() {
                 <Link 
                   to={item.path} 
                   className={`font-sans text-[13px] font-medium transition-colors ${
-                    isSticky ? 'text-brand-black hover:text-brand-green' : 'text-white/80 hover:text-white'
+                    isSticky ? 'text-white/90 hover:text-brand-gold' : 'text-white/80 hover:text-white'
                   }`}
                 >
                   {item.name}
@@ -97,8 +97,8 @@ export default function Navbar() {
           </a>
           
           <button 
-            className={`md:hidden p-3 border rounded-lg active:bg-black/5 transition-colors ${
-              isSticky ? 'text-brand-black border-brand-border' : 'text-white border-white/20'
+            className={`md:hidden p-3 border rounded-lg active:bg-white/5 transition-colors ${
+              isSticky ? 'text-white border-white/20' : 'text-white border-white/20'
             }`}
             onClick={() => setIsOpen(!isOpen)}
           >

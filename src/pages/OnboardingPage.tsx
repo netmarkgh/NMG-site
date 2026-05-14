@@ -269,7 +269,7 @@ export default function OnboardingPage() {
 
         {/* Form Card */}
         <div className="bg-white border border-brand-border rounded-3xl shadow-xl overflow-hidden shadow-black/[0.03]">
-          <div className="p-8 border-b border-brand-border bg-gradient-to-br from-[#FDF3E1] to-white">
+          <div className="p-6 md:p-8 border-b border-brand-border bg-gradient-to-br from-[#FDF3E1] to-white">
             <span className="text-[10px] font-bold uppercase tracking-widest text-brand-gold block mb-2">
               Step {step} of 4
             </span>
@@ -287,13 +287,13 @@ export default function OnboardingPage() {
             </p>
           </div>
 
-          <div className="p-8">
+          <div className="p-6 md:p-8">
             {errors.length > 0 && (
               <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-8">
                 <p className="text-red-700 font-bold text-xs mb-2 flex items-center gap-2">
                   <span className="text-lg">⚠️</span> Please complete:
                 </p>
-                <ul className="grid grid-cols-2 gap-x-4 gap-y-1 list-disc list-inside text-red-600 text-[11px] font-medium">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 list-disc list-inside text-red-600 text-[11px] font-medium">
                   {errors.map((e, i) => <li key={i}>{e}</li>)}
                 </ul>
               </div>

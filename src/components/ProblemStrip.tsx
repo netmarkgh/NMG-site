@@ -6,7 +6,7 @@ export default function ProblemStrip() {
   return (
     <div className="bg-brand-black text-brand-white py-16 md:py-20 px-6">
       <div ref={containerRef} className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-20">
-        <p className="reveal flex-1 font-display text-4xl md:text-5xl font-extrabold leading-[1.05] tracking-tight">
+        <p className="reveal flex-1 font-display text-3xl md:text-5xl font-extrabold leading-[1.05] tracking-tight">
           Most Ghanaian businesses are<br />
           <span className="text-brand-gold italic">invisible online.</span>
           <span className="block mt-8 text-white/50 text-base md:text-lg font-medium leading-relaxed max-w-md">

@@ -8,7 +8,7 @@ export default function CTA() {
   return (
     <section className="bg-[#006C35] px-6 py-24 md:py-32 text-center text-white">
       <div ref={containerRef} className="reveal max-w-4xl mx-auto">
-        <h2 className="font-display text-white text-4xl md:text-6xl font-extrabold leading-[1.1] tracking-tight mb-8">
+        <h2 className="font-display text-white text-3xl md:text-6xl font-extrabold leading-[1.1] tracking-tight mb-8">
           Ready to grow your business<br />
           online?
         </h2>

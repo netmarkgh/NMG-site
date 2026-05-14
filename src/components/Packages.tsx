@@ -64,7 +64,7 @@ export default function Packages() {
               key={i} 
               className={`reveal relative p-8 md:p-10 rounded-3xl border transition-all ${
                 pkg.featured 
-                  ? 'bg-brand-green text-brand-white border-brand-green shadow-2xl shadow-brand-green/20 scale-105 z-10' 
+                  ? 'bg-brand-green text-brand-white border-brand-green shadow-2xl shadow-brand-green/20 md:scale-105 z-10' 
                   : 'bg-brand-white text-brand-black border-brand-border hover:shadow-xl'
               }`}
             >

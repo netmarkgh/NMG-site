@@ -11,9 +11,19 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
+
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
 
   const navLinks = [
     { name: 'Services', path: '#services', isExternal: false },
@@ -79,7 +89,7 @@ export default function Navbar() {
           </a>
           
           <button 
-            className="md:hidden p-2 text-brand-black border border-brand-border rounded-lg"
+            className="md:hidden p-3 text-brand-black border border-brand-border rounded-lg active:bg-black/5 transition-colors"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

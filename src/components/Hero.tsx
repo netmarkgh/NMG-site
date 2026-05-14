@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[90vh] flex flex-col justify-center px-6 pt-32 pb-20 overflow-hidden">
+    <section className="relative min-h-[90vh] md:min-h-screen flex flex-col justify-center px-6 pt-24 md:pt-32 pb-20 overflow-hidden">
       <div className="hero-bg absolute inset-0 z-0" />
       <div className="hero-grid absolute inset-0 z-0" />
       

@@ -6,6 +6,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import OnboardingPage from './pages/OnboardingPage';
+import DashboardPage from './pages/DashboardPage';
 
 export default function App() {
   const basename = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/services" element={<LandingPage />} /> {/* Placeholder */}
         <Route path="/onboarding" element={<OnboardingPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
       </Routes>
     </Router>
   );

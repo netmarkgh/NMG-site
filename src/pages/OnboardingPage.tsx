@@ -144,10 +144,10 @@ export default function OnboardingPage() {
       if (!supabase) throw new Error('Supabase not configured');
 
       const [ghanaFrontUrl, ghanaBackUrl, personalPicUrl, logoUrl] = await Promise.all([
-        form.ghanaFront ? uploadFile(form.ghanaFront, 'onboarding-assets') : '',
-        form.ghanaBack ? uploadFile(form.ghanaBack, 'onboarding-assets') : '',
-        form.personalPic ? uploadFile(form.personalPic, 'onboarding-assets') : '',
-        form.logo ? uploadFile(form.logo, 'onboarding-assets') : '',
+        form.ghanaFront ? uploadFile(form.ghanaFront, 'onboarding-assets') : Promise.resolve(''),
+        form.ghanaBack ? uploadFile(form.ghanaBack, 'onboarding-assets') : Promise.resolve(''),
+        form.personalPic ? uploadFile(form.personalPic, 'onboarding-assets') : Promise.resolve(''),
+        form.logo ? uploadFile(form.logo, 'onboarding-assets') : Promise.resolve(''),
       ]);
 
       const { error } = await supabase

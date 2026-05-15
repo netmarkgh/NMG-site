@@ -1,0 +1,47 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function isValidOnboarding(data) {
+      return data.bizName is string && data.bizName.size() <= 200 &&
+             data.ownerName is string && data.ownerName.size() <= 200 &&
+             data.phone is string && data.phone.size() <= 50 &&
+             data.email is string && data.email.size() <= 200 &&
+             data.industry is string && data.industry.size() <= 100 &&
+             data.location is string && data.location.size() <= 200 &&
+             data.website is string && data.website.size() <= 500 &&
+             data.services is list && data.services.size() <= 10 &&
+             data.currentMkt is string && data.currentMkt.size() <= 500 &&
+             data.budget is string && data.budget.size() <= 100 &&
+             data.goals is list && data.goals.size() <= 10 &&
+             data.target is string && data.target.size() <= 1000 &&
+             data.bizDesc is string && data.bizDesc.size() <= 2000 &&
+             data.scale is number && data.scale >= 1 && data.scale <= 10 &&
+             data.extra is string && data.extra.size() <= 2000 &&
+             data.ghanaFrontUrl is string && data.ghanaFrontUrl.size() <= 1000 &&
+             data.ghanaBackUrl is string && data.ghanaBackUrl.size() <= 1000 &&
+             data.personalPicUrl is string && data.personalPicUrl.size() <= 1000 &&
+             data.logoUrl is string && data.logoUrl.size() <= 1000 &&
+             data.createdAt == request.time;
+    }
+
+    match /onboarding/{onboardingId} {
+      allow create: if isValidId(onboardingId) && isValidOnboarding(incoming());
+      // No public read/update/delete
+      // In a real app, an admin user would have read access here.
+      allow read, update, delete: if false;
+    }
+  }
+}

@@ -53,7 +53,7 @@ export default function DashboardPage() {
       setSession(session);
     });
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChanged((_event: string, session: any) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: string, session: any) => {
       setSession(session);
     });
 

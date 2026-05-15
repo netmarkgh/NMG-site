@@ -96,11 +96,29 @@ export default function DashboardPage() {
     setLoading(false);
   };
 
-  const filteredSubmissions = submissions.filter(s => 
-    s.biz_name.toLowerCase().includes(search.toLowerCase()) ||
-    s.owner_name.toLowerCase().includes(search.toLowerCase()) ||
-    s.email.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredSubmissions = submissions.filter(s => {
+    const biz = s.biz_name?.toLowerCase() || '';
+    const owner = s.owner_name?.toLowerCase() || '';
+    const emailStr = s.email?.toLowerCase() || '';
+    const query = search.toLowerCase();
+    
+    return biz.includes(query) || owner.includes(query) || emailStr.includes(query);
+  });
+
+  useEffect(() => {
+    console.log('Dashboard mounted, session status:', !!session);
+  }, [session]);
+
+  if (!supabase) {
+    return (
+      <div className="min-h-screen bg-brand-white flex items-center justify-center p-6">
+        <div className="text-center">
+          <p className="text-brand-black font-bold">Supabase Configuration Missing</p>
+          <p className="text-brand-grey text-sm">Please check your environment variables.</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!session) {
     return (
@@ -392,8 +410,8 @@ export default function DashboardPage() {
                         <div>
                           <p className="text-[10px] font-bold text-brand-grey uppercase tracking-widest mb-2">Services Requested</p>
                           <div className="flex flex-wrap gap-2">
-                            {selectedSubmission.services.split(', ').map((s, i) => (
-                              <span key={i} className="px-3 py-1.5 bg-brand-gold/10 text-brand-gold text-[11px] font-bold rounded-lg border border-brand-gold/10">{s}</span>
+                            {(selectedSubmission.services || '').split(', ').map((s, i) => (
+                              s && <span key={i} className="px-3 py-1.5 bg-brand-gold/10 text-brand-gold text-[11px] font-bold rounded-lg border border-brand-gold/10">{s}</span>
                             ))}
                           </div>
                         </div>

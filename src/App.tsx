@@ -3,15 +3,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import OnboardingPage from './pages/OnboardingPage';
 import DashboardPage from './pages/DashboardPage';
 
 export default function App() {
-  const basename = import.meta.env.BASE_URL.replace(/\/$/, "");
   return (
-    <Router basename={basename || "/"}>
+    <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/services" element={<LandingPage />} /> {/* Placeholder */}

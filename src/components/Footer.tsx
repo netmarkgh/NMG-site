@@ -7,15 +7,9 @@ export default function Footer() {
         <div className="flex items-center">
           <div className="w-56 h-20 flex-shrink-0">
             <img 
-              src={`${import.meta.env.BASE_URL}logo.png`} 
+              src={`${import.meta.env.BASE_URL}nmg_logo.svg`} 
               alt="NMG" 
               className="w-full h-full object-contain"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                if (!target.src.endsWith('.svg')) {
-                  target.src = `${import.meta.env.BASE_URL}nmg_logo.svg`;
-                }
-              }}
             />
           </div>
         </div>

@@ -174,11 +174,16 @@ export default function OnboardingPage() {
           logo_url: logoUrl
         }]);
 
-      if (error) throw error;
+      if (error) {
+        console.error('Supabase Insertion Error:', error);
+        throw error;
+      }
       
       setIsSuccess(true);
     } catch (err: any) {
-      alert('Submission failed: ' + err.message);
+      console.error('Submission Error Details:', err);
+      const msg = err.message || 'An unknown error occurred';
+      alert('Submission failed: ' + msg);
     } finally {
       setIsSubmitting(false);
     }

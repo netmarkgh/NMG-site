@@ -353,7 +353,7 @@ export default function DashboardPage() {
                   </div>
                   <div>
                     <h3 className="font-display text-2xl font-bold text-brand-black">{selectedSubmission.biz_name}</h3>
-                    <p className="text-xs font-bold text-brand-gold uppercase tracking-widest">Submission Ref: #{selectedSubmission.id.slice(0, 8)}</p>
+                    <p className="text-xs font-bold text-brand-gold uppercase tracking-widest">Submission Ref: #{String(selectedSubmission.id || '').slice(0, 8)}</p>
                   </div>
                 </div>
                 <button 

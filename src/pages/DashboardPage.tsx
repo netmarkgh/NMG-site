@@ -10,6 +10,7 @@ import {
 import { getSupabase } from '../lib/supabase';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import EditorialBuilder from '../components/EditorialBuilder';
 
 interface Submission {
   id: string;
@@ -46,7 +47,7 @@ export default function DashboardPage() {
   const [isEditing, setIsEditing] = useState(false);
   const [editForm, setEditForm] = useState<Partial<Submission>>({});
   const [isSaving, setIsSaving] = useState(false);
-  const [viewMode, setViewMode] = useState<'list' | 'stats'>('list');
+  const [viewMode, setViewMode] = useState<'list' | 'stats' | 'editorial'>('list');
 
   const supabase = getSupabase();
 
@@ -119,22 +120,41 @@ export default function DashboardPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!supabase) return;
-    if (!confirm('Are you sure you want to delete this submission? This action cannot be undone.')) return;
+    if (!supabase) {
+      console.error('Delete failed: Supabase client not initialized');
+      return;
+    }
+    
+    console.log('Attempting to delete record:', id);
+    if (!confirm('Are you sure you want to delete this submission? This action cannot be undone.')) {
+      console.log('Delete cancelled by user');
+      return;
+    }
     
     setLoading(true);
-    const { error } = await supabase
-      .from('onboarding')
-      .delete()
-      .eq('id', id);
+    try {
+      const { error, data, count } = await supabase
+        .from('onboarding')
+        .delete()
+        .eq('id', id)
+        .select();
 
-    if (error) {
-      alert('Delete failed: ' + error.message);
-    } else {
-      setSelectedSubmission(null);
-      await fetchSubmissions();
+      console.log('Delete response:', { error, data, count });
+
+      if (error) {
+        console.error('Supabase delete error:', error);
+        alert('Delete failed: ' + error.message);
+      } else {
+        console.log('Delete successful');
+        setSelectedSubmission(null);
+        await fetchSubmissions();
+      }
+    } catch (err: any) {
+      console.error('Delete exception:', err);
+      alert('Delete failed with exception: ' + err.message);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleCreateManual = async () => {
@@ -294,8 +314,33 @@ export default function DashboardPage() {
             ))}
           </div>
 
-          {/* Main List */}
-          <div className="bg-white border border-brand-border rounded-[32px] overflow-hidden shadow-sm shadow-black/[0.02]">
+          {/* Segment Selector tabs */}
+          <div className="flex items-center gap-1.5 bg-white border border-brand-border p-1.5 rounded-2xl mb-8 max-w-md shadow-sm">
+            <button
+              onClick={() => setViewMode('list')}
+              className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-display font-bold text-xs transition-all ${
+                viewMode === 'list' 
+                  ? 'bg-brand-black text-white shadow' 
+                  : 'text-brand-grey hover:text-brand-black hover:bg-brand-black/5'
+              }`}
+            >
+              <Users className="w-4.5 h-4.5" /> Client Leads
+            </button>
+            <button
+              onClick={() => setViewMode('editorial')}
+              className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-display font-bold text-xs transition-all ${
+                viewMode === 'editorial' 
+                  ? 'bg-brand-black text-white shadow' 
+                  : 'text-brand-grey hover:text-brand-black hover:bg-brand-black/5'
+              }`}
+            >
+              <Edit2 className="w-4.5 h-4.5 text-brand-gold" /> Editorial Manager
+            </button>
+          </div>
+
+          {viewMode === 'list' ? (
+            /* Main List */
+            <div className="bg-white border border-brand-border rounded-[32px] overflow-hidden shadow-sm shadow-black/[0.02]">
             <div className="p-6 border-b border-brand-border flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="flex flex-1 items-center gap-4">
                 <div className="relative flex-1 max-w-md">
@@ -398,6 +443,9 @@ export default function DashboardPage() {
               </div>
             </div>
           </div>
+          ) : (
+            <EditorialBuilder />
+          )}
         </div>
       </div>
 

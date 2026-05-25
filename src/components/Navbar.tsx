@@ -7,7 +7,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const isDarkBgPage = location.pathname === '/' || location.pathname === '';
+  const isDarkBgPage = location.pathname === '/' || location.pathname === '/clients' || location.pathname === '/our-clients' || location.pathname === '/services';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,13 +28,13 @@ export default function Navbar() {
   }, [isOpen]);
 
   const navLinks = [
-    { name: 'Home', path: '/#home', isExternal: false },
-    { name: 'Our Clients', path: '/#our-clients', isExternal: false },
-    { name: 'Full Services', path: '/#services', isExternal: false },
+    { name: 'Home', path: '/', isExternal: false },
+    { name: 'Our Clients', path: '/clients', isExternal: false },
+    { name: 'Full Services', path: '/services', isExternal: false },
     { name: 'Get Onboard', path: '/onboarding', isExternal: false },
   ];
 
-    const isSticky = scrolled || !isDarkBgPage;
+  const isSticky = scrolled || !isDarkBgPage;
 
   return (
     <nav 
@@ -57,25 +57,16 @@ export default function Navbar() {
         <ul className="hidden md:flex items-center gap-8">
           {navLinks.map((item) => (
             <li key={item.name}>
-              {item.path.startsWith('#') ? (
-                <a 
-                  href={item.path} 
-                  className={`font-sans text-[13px] font-medium transition-colors ${
-                    isSticky ? 'text-white/90 hover:text-brand-gold' : 'text-white/80 hover:text-white'
-                  }`}
-                >
-                  {item.name}
-                </a>
-              ) : (
-                <Link 
-                  to={item.path} 
-                  className={`font-sans text-[13px] font-medium transition-colors ${
-                    isSticky ? 'text-white/90 hover:text-brand-gold' : 'text-white/80 hover:text-white'
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              )}
+              <Link 
+                to={item.path} 
+                className={`font-sans text-[13px] font-medium transition-colors ${
+                  location.pathname === item.path
+                    ? 'text-brand-gold'
+                    : isSticky ? 'text-white/95 hover:text-brand-gold' : 'text-white/80 hover:text-white'
+                }`}
+              >
+                {item.name}
+              </Link>
             </li>
           ))}
         </ul>
@@ -113,23 +104,15 @@ export default function Navbar() {
             <ul className="flex flex-col gap-4">
               {navLinks.map((item) => (
                 <li key={item.name}>
-                  {item.path.startsWith('#') ? (
-                    <a 
-                      href={item.path}
-                      onClick={() => setIsOpen(false)}
-                      className="block font-display text-lg font-semibold text-white hover:text-brand-gold transition-colors"
-                    >
-                      {item.name}
-                    </a>
-                  ) : (
-                    <Link 
-                      to={item.path}
-                      onClick={() => setIsOpen(false)}
-                      className="block font-display text-lg font-semibold text-white hover:text-brand-gold transition-colors"
-                    >
-                      {item.name}
-                    </Link>
-                  )}
+                  <Link 
+                    to={item.path}
+                    onClick={() => setIsOpen(false)}
+                    className={`block font-display text-lg font-semibold transition-colors ${
+                      location.pathname === item.path ? 'text-brand-gold' : 'text-white hover:text-brand-gold'
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
                 </li>
               ))}
               <li>

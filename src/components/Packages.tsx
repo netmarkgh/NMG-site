@@ -27,7 +27,7 @@ const packages = [
     featured: true
   },
   {
-    name: 'Scale',
+    name: 'Premium Partner',
     sub: 'Full digital marketing partner',
     items: [
       'Everything in Growth',

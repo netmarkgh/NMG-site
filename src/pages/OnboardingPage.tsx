@@ -483,8 +483,7 @@ export default function OnboardingPage() {
                           onChange={(e) => setForm({ ...form, budget: e.target.value })}
                         >
                           <option value="">— Select a range —</option>
-                          <option>Under GHS 500/month</option>
-                          <option>GHS 500 – 1,000/month</option>
+                          <option>Under GHS 1,000/month</option>
                           <option>GHS 1,000 – 2,500/month</option>
                           <option>GHS 2,500 – 5,000/month</option>
                           <option>GHS 5,000+/month</option>

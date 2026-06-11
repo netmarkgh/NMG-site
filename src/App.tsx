@@ -7,6 +7,7 @@ import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-d
 import { useEffect } from 'react';
 import LandingPage from './pages/LandingPage';
 import OnboardingPage from './pages/OnboardingPage';
+import DirectOnboardingPage from './pages/DirectOnboardingPage';
 import DashboardPage from './pages/DashboardPage';
 import FullServicesPage from './pages/FullServicesPage';
 import OurClientsPage from './pages/OurClientsPage';
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="/clients" element={<OurClientsPage />} />
         <Route path="/our-clients" element={<OurClientsPage />} />
         <Route path="/onboarding" element={<OnboardingPage />} />
+        <Route path="/onboarding-direct" element={<DirectOnboardingPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/campaign" element={<EditorialCampaignPage />} />
       </Routes>

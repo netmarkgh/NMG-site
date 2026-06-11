@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Lock, Check, ArrowRight, ArrowLeft, Send, 
-  Upload, Briefcase, 
-  MessageCircle
+  Briefcase, MessageCircle, Sparkles
 } from 'lucide-react';
 import { getSupabase } from '../lib/supabase';
 import Navbar from '../components/Navbar';
@@ -27,10 +26,6 @@ interface FormState {
   bizDesc: string;
   scale: number | null;
   extra: string;
-  ghanaFront: File | null;
-  ghanaBack: File | null;
-  personalPic: File | null;
-  logo: File | null;
 }
 
 const INDUSTRIES = [
@@ -62,15 +57,14 @@ const GOALS = [
   { id: 'LAUNCH', label: '🚀 Launch a new product or service' },
 ];
 
-export default function OnboardingPage() {
+export default function DirectOnboardingPage() {
   const [step, setStep] = useState<Step>(1);
   const [form, setForm] = useState<FormState>({
     bizName: '', ownerName: '', phone: '', email: '',
     industry: '', location: '', website: '',
     services: [], currentMkt: '', budget: '',
     goals: [], target: '', bizDesc: '',
-    scale: null, extra: '',
-    ghanaFront: null, ghanaBack: null, personalPic: null, logo: null
+    scale: null, extra: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -86,8 +80,6 @@ export default function OnboardingPage() {
       if (!form.industry) errs.push('Industry is required');
       if (!form.location) errs.push('Location is required');
       if (!form.website) errs.push('Platform link is required');
-      if (!form.ghanaFront) errs.push('Ghana Card Front is required');
-      if (!form.ghanaBack) errs.push('Ghana Card Back is required');
     }
     if (s === 2) {
       if (form.services.length === 0) errs.push('Select at least one service');
@@ -99,8 +91,6 @@ export default function OnboardingPage() {
       if (!form.target) errs.push('Target customer is required');
       if (!form.bizDesc) errs.push('Business description is required');
       if (form.scale === null) errs.push('Online presence rating is required');
-      if (!form.personalPic) errs.push('Personal picture is required');
-      if (!form.logo) errs.push('Logo or assets are required');
       if (!form.extra) errs.push('Additional notes are required (or write "None")');
     }
     setErrors(errs);
@@ -119,36 +109,11 @@ export default function OnboardingPage() {
     window.scrollTo(0, 0);
   };
 
-  const uploadFile = async (file: File, bucket: string) => {
-    const supabase = getSupabase();
-    if (!supabase) throw new Error('Supabase not configured');
-    
-    const fileName = `${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
-    const { data, error } = await supabase.storage
-      .from(bucket)
-      .upload(fileName, file);
-
-    if (error) throw error;
-    
-    const { data: { publicUrl } } = supabase.storage
-      .from(bucket)
-      .getPublicUrl(data.path);
-      
-    return publicUrl;
-  };
-
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
       const supabase = getSupabase();
       if (!supabase) throw new Error('Supabase not configured');
-
-      const [ghanaFrontUrl, ghanaBackUrl, personalPicUrl, logoUrl] = await Promise.all([
-        form.ghanaFront ? uploadFile(form.ghanaFront, 'onboarding-assets') : Promise.resolve(''),
-        form.ghanaBack ? uploadFile(form.ghanaBack, 'onboarding-assets') : Promise.resolve(''),
-        form.personalPic ? uploadFile(form.personalPic, 'onboarding-assets') : Promise.resolve(''),
-        form.logo ? uploadFile(form.logo, 'onboarding-assets') : Promise.resolve(''),
-      ]);
 
       const { error } = await supabase
         .from('onboarding')
@@ -168,10 +133,11 @@ export default function OnboardingPage() {
           biz_desc: form.bizDesc,
           presence_scale: `${form.scale}/10`,
           extra_notes: form.extra,
-          ghana_front_url: ghanaFrontUrl,
-          ghana_back_url: ghanaBackUrl,
-          personal_pic_url: personalPicUrl,
-          logo_url: logoUrl
+          // Images/ID fields set to empty string as requested since Admin uploads them manually
+          ghana_front_url: '',
+          ghana_back_url: '',
+          personal_pic_url: '',
+          logo_url: ''
         }]);
 
       if (error) {
@@ -191,9 +157,9 @@ export default function OnboardingPage() {
 
   if (isSuccess) {
     const waMsg = encodeURIComponent(
-      `Hi NMG! I just completed my onboarding form.\n\n` +
+      `Hi NMG! I just completed my simplified onboarding form.\n\n` +
       `Business: ${form.bizName}\nContact: ${form.ownerName}\n` +
-      `Looking forward to working with you! 🚀`
+      `Note: Photos are provided separately. Looking forward to working together! 🚀`
     );
     return (
       <div className="min-h-screen bg-brand-white font-onboarding flex flex-col">
@@ -203,7 +169,7 @@ export default function OnboardingPage() {
             <div className="text-5xl mb-6">🎉</div>
             <h2 className="font-display text-2xl font-bold mb-4">You're all set!</h2>
             <p className="text-brand-grey text-sm leading-relaxed mb-8">
-              Thanks for completing your onboarding. We've received everything and will review your details before reaching out.
+              Thank you for completing the info-only onboarding registration. We have logged your details in our system and will link them with the photos you provided.
             </p>
             <a 
               href={`https://wa.me/233268786647?text=${waMsg}`}
@@ -224,15 +190,20 @@ export default function OnboardingPage() {
       <Navbar />
       <div className="flex-1 pt-32 pb-20 px-6">
         <div className="max-w-2xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-            <a 
-              href="/#/onboarding-direct" 
-              className="text-xs font-bold text-brand-gold hover:underline flex items-center gap-1.5 bg-brand-gold/5 px-4 py-2 rounded-xl border border-brand-gold/15"
-            >
-              🤝 Already sent your photos? Click here
-            </a>
+          {/* Header Banner for Fast Form */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
+            <div className="flex flex-col items-start gap-1">
+              <div className="bg-brand-gold/[0.08] border border-brand-gold/30 rounded-xl px-4 py-2 text-xs font-semibold text-brand-gold flex items-center gap-2">
+                <Sparkles className="w-4.5 h-4.5 shrink-0" />
+                <span>Direct Form: Pictures/ID are uploaded by Admin</span>
+              </div>
+              <a href="/#/onboarding" className="text-[10px] font-bold text-brand-grey hover:text-brand-black transition-colors ml-1 mt-1">
+                ← Switch to Standard Form (With file uploads)
+              </a>
+            </div>
+            
             <div className="flex items-center gap-1.5 text-[10px] font-bold text-brand-grey uppercase tracking-widest bg-white border border-brand-border rounded-full px-4 py-1.5 shadow-sm">
-              <Lock className="w-3.5 h-3.5 text-brand-green" /> Secure Onboarding
+              <Lock className="w-3" /> Secure Registration
             </div>
           </div>
 
@@ -274,13 +245,13 @@ export default function OnboardingPage() {
               <h2 className="font-display text-2xl font-bold mb-2">
                 {step === 1 && "Tell us about your business"}
                 {step === 2 && "What do you need help with?"}
-                {step === 3 && "Goals, audience & assets"}
+                {step === 3 && "Goals, audience & info"}
                 {step === 4 && "Review your details"}
               </h2>
               <p className="text-brand-grey text-sm">
                 {step === 1 && "Basic info so we understand who we're working with."}
                 {step === 2 && "Select all services you're interested in."}
-                {step === 3 && "Help us understand your customers."}
+                {step === 3 && "Help us understand your customers and goals."}
                 {step === 4 && "Everything look right? Submit and we'll reach out."}
               </p>
             </div>
@@ -327,47 +298,6 @@ export default function OnboardingPage() {
                             value={form.ownerName}
                             onChange={(e) => setForm({ ...form, ownerName: e.target.value })}
                           />
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                          <label className="text-xs font-bold text-brand-grey uppercase tracking-wider">Ghana Card (Front) *</label>
-                          <label className={`block border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all ${form.ghanaFront ? 'border-brand-green bg-brand-green/5' : 'border-brand-border bg-[#F7F6F2] hover:border-brand-gold'}`}>
-                            <input 
-                              type="file" className="hidden" accept="image/*"
-                              onChange={(e) => setForm({ ...form, ghanaFront: e.target.files?.[0] || null })}
-                            />
-                            {form.ghanaFront ? (
-                              <span className="text-brand-green text-xs font-bold flex items-center justify-center gap-2">
-                                <Check className="w-4 h-4" /> {form.ghanaFront.name}
-                              </span>
-                            ) : (
-                              <div className="space-y-2">
-                                <div className="text-2xl opacity-50">🪪</div>
-                                <span className="text-[10px] font-bold text-brand-grey">Upload Front Side</span>
-                              </div>
-                            )}
-                          </label>
-                        </div>
-                        <div className="space-y-2">
-                          <label className="text-xs font-bold text-brand-grey uppercase tracking-wider">Ghana Card (Back) *</label>
-                          <label className={`block border-2 border-dashed rounded-xl p-6 text-center cursor-pointer transition-all ${form.ghanaBack ? 'border-brand-green bg-brand-green/5' : 'border-brand-border bg-[#F7F6F2] hover:border-brand-gold'}`}>
-                            <input 
-                              type="file" className="hidden" accept="image/*"
-                              onChange={(e) => setForm({ ...form, ghanaBack: e.target.files?.[0] || null })}
-                            />
-                            {form.ghanaBack ? (
-                              <span className="text-brand-green text-xs font-bold flex items-center justify-center gap-2">
-                                <Check className="w-4 h-4" /> {form.ghanaBack.name}
-                              </span>
-                            ) : (
-                              <div className="space-y-2">
-                                <div className="text-2xl opacity-50">🪪</div>
-                                <span className="text-[10px] font-bold text-brand-grey">Upload Back Side</span>
-                              </div>
-                            )}
-                          </label>
                         </div>
                       </div>
 
@@ -567,46 +497,6 @@ export default function OnboardingPage() {
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-xs font-bold text-brand-grey uppercase tracking-wider">Personal Picture (HD) *</label>
-                        <label className={`flex flex-col items-center justify-center border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all ${form.personalPic ? 'border-brand-green bg-brand-green/5' : 'border-brand-border bg-[#F7F6F2] hover:border-brand-gold'}`}>
-                          <input 
-                            type="file" className="hidden" accept="image/*"
-                            onChange={(e) => setForm({ ...form, personalPic: e.target.files?.[0] || null })}
-                          />
-                          {form.personalPic ? (
-                            <div className="text-brand-green font-bold text-sm flex items-center gap-2">
-                              <Check className="w-5 h-5" /> {form.personalPic.name}
-                            </div>
-                          ) : (
-                            <>
-                              <Upload className="w-8 h-8 text-brand-grey mb-2" />
-                              <span className="text-[11px] font-bold text-brand-grey">Upload HD Photo</span>
-                            </>
-                          )}
-                        </label>
-                      </div>
-
-                      <div className="space-y-2">
-                        <label className="text-xs font-bold text-brand-grey uppercase tracking-wider">Logo / Brand Assets *</label>
-                        <label className={`flex flex-col items-center justify-center border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all ${form.logo ? 'border-brand-green bg-brand-green/5' : 'border-brand-border bg-[#F7F6F2] hover:border-brand-gold'}`}>
-                          <input 
-                            type="file" className="hidden" accept="image/*,.pdf,.zip"
-                            onChange={(e) => setForm({ ...form, logo: e.target.files?.[0] || null })}
-                          />
-                          {form.logo ? (
-                            <div className="text-brand-green font-bold text-sm flex items-center gap-2">
-                              <Check className="w-5 h-5" /> {form.logo.name}
-                            </div>
-                          ) : (
-                            <>
-                              <Briefcase className="w-8 h-8 text-brand-grey mb-2" />
-                              <span className="text-[11px] font-bold text-brand-grey">Upload Assets (PNG, ZIP, etc)</span>
-                            </>
-                          )}
-                        </label>
-                      </div>
-
-                      <div className="space-y-2">
                         <label className="text-xs font-bold text-brand-grey uppercase tracking-wider">Anything else for NMG? *</label>
                         <textarea 
                           className="w-full bg-[#F7F6F2] border-2 border-brand-border rounded-xl px-4 py-3 text-sm focus:border-brand-gold focus:bg-white outline-none min-h-[100px] transition-all"
@@ -633,7 +523,7 @@ export default function OnboardingPage() {
                         { l: 'Budget', v: form.budget },
                         { l: 'Goals', v: form.goals.join(', ') },
                         { l: 'Presence', v: `${form.scale}/10` },
-                        { l: 'Assets', v: `${form.ghanaFront ? '✓ Ghana Card Front ' : ''}${form.ghanaBack ? '✓ Ghana Card Back ' : ''}${form.personalPic ? '✓ Personal Photo ' : ''}${form.logo ? '✓ Logo' : ''}` },
+                        { l: 'Assets', v: 'Will be uploaded manually by Admin (Provided already)' },
                       ].map((item, i) => (
                         <div key={i} className="flex border-b border-brand-border pb-2">
                           <span className="w-24 text-[10px] font-bold text-brand-grey uppercase">{item.l}</span>
@@ -679,7 +569,7 @@ export default function OnboardingPage() {
                     onClick={handleSubmit}
                     className="flex items-center gap-2 bg-brand-black text-white px-8 py-3 rounded-full font-display font-bold text-sm hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? "Uploading..." : "✓ Submit Onboarding"} <Send className="w-4 h-4" />
+                    {isSubmitting ? "Submitting..." : "✓ Submit Onboarding"} <Send className="w-4 h-4" />
                   </button>
                 )}
               </div>

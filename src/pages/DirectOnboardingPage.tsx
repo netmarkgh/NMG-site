@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Lock, Check, ArrowRight, ArrowLeft, Send, 
@@ -197,9 +198,9 @@ export default function DirectOnboardingPage() {
                 <Sparkles className="w-4.5 h-4.5 shrink-0" />
                 <span>Direct Form: Pictures/ID are uploaded by Admin</span>
               </div>
-              <a href="/#/onboarding" className="text-[10px] font-bold text-brand-grey hover:text-brand-black transition-colors ml-1 mt-1">
+              <Link to="/onboarding" className="text-[10px] font-bold text-brand-grey hover:text-brand-black transition-colors ml-1 mt-1">
                 ← Switch to Standard Form (With file uploads)
-              </a>
+              </Link>
             </div>
             
             <div className="flex items-center gap-1.5 text-[10px] font-bold text-brand-grey uppercase tracking-widest bg-white border border-brand-border rounded-full px-4 py-1.5 shadow-sm">

@@ -527,7 +527,7 @@ export default function EditorialBuilder() {
 
           <div className="mt-4 flex flex-col gap-2">
             <a 
-              href="/#/campaign" 
+              href="#/campaign" 
               target="_blank" 
               className="text-[10px] font-bold text-brand-gold flex items-center justify-center gap-1.5 hover:underline"
             >

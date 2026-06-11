@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Lock, Check, ArrowRight, ArrowLeft, Send, 
@@ -225,12 +226,12 @@ export default function OnboardingPage() {
       <div className="flex-1 pt-32 pb-20 px-6">
         <div className="max-w-2xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-            <a 
-              href="/#/onboarding-direct" 
+            <Link 
+              to="/onboarding-direct" 
               className="text-xs font-bold text-brand-gold hover:underline flex items-center gap-1.5 bg-brand-gold/5 px-4 py-2 rounded-xl border border-brand-gold/15"
             >
               🤝 Already sent your photos? Click here
-            </a>
+            </Link>
             <div className="flex items-center gap-1.5 text-[10px] font-bold text-brand-grey uppercase tracking-widest bg-white border border-brand-border rounded-full px-4 py-1.5 shadow-sm">
               <Lock className="w-3.5 h-3.5 text-brand-green" /> Secure Onboarding
             </div>
